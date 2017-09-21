@@ -1,0 +1,49 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply from: "../config/git-version.gradle"
+
+rootProject.applicationModulePlugins.each {
+    apply plugin: it
+}
+
+android {
+    def ext = rootProject.extensions.ext
+
+    compileSdkVersion ext.android.compileSdkVersion
+    buildToolsVersion ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId "io.bratexsoft.specialtycofeecode"
+        minSdkVersion ext.android.minSdkVersion
+        targetSdkVersion ext.android.targetSdkVersion
+
+        versionCode gitVersionCode
+        versionName gitVersionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+
+    kapt {
+        generateStubs = true
+    }
+}
+
+dependencies {
+    rootProject.applicationModuleDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+}

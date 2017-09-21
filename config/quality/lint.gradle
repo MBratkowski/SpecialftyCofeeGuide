@@ -1,0 +1,18 @@
+android {
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+
+        disable 'InvalidPackage'
+        disable 'GoogleAppIndexingWarning'
+        disable 'GradleDependency'
+
+        //Remove those after take care of design issues
+        disable 'PrivateResource'
+        disable 'IconColors'
+        disable 'Overdraw'
+        disable 'VectorDrawableCompat'
+        disable 'UnusedResources'
+        disable 'ContentDescription'
+    }
+}

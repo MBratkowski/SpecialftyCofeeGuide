@@ -1,0 +1,83 @@
+ext {
+    android = [
+            compileSdkVersion : 26,
+            buildToolsVersion : "26.0.1",
+            minSdkVersion     : 19,
+            minSdkDebugVersion: 21,
+            targetSdkVersion  : 26,
+    ]
+    build = [
+            gradle      : "3.0.0-beta6",
+            kotlin      : "1.1.4-3",
+            playServices: "3.1.0"
+    ]
+
+    buildPlugins = [
+            playServices: "com.google.gms:google-services:$build.playServices",
+            gradle      : "com.android.tools.build:gradle:$build.gradle",
+            kotlin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$build.kotlin"
+    ]
+
+    def androidSupportLibs = '26.1.0'
+    def versionJUnit = '4.12'
+    def versionEspresso = '2.2.2'
+    def versionRxJava = '2.1.0'
+    def versionRxKotlin = '2.0.3'
+    def versionRxAndroid = '2.0.1'
+    def versionDagger = '2.11'
+    def versionConstraint = '1.0.2'
+    def versionJavax = '1'
+    def versionFirebase = '11.2.0'
+    def versionPresistence = '1.0.0-alpha9'
+
+    def libs = [
+            appCompat          : [group: 'com.android.support', name: 'appcompat-v7', version: androidSupportLibs],
+            constraintLayout   : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraint],
+            kotlin             : [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre7', version: build.kotlin],
+            rxJava             : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionRxJava],
+            rxAndroid          : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionRxAndroid],
+            rxKotlin           : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: versionRxKotlin],
+            dagger             : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
+            javax              : [group: 'javax.inject', name: 'javax.inject', version: '1'],
+            daggerCompiler     : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger],
+            dataBindingCompiler: [group: 'com.android.databinding', name: 'compiler', version: build.gradle],
+            design             : [group: 'com.android.support', name: 'design', version: androidSupportLibs],
+            persistence        : [group: 'android.arch.persistence.room', name: 'runtime', version: versionPresistence],
+            persistenceRx      : [group: 'android.arch.persistence.room', name: 'rxjava2', version: versionPresistence],
+            persistenceCompiler: [group: 'android.arch.persistence.room', name: 'compiler', version: versionPresistence],
+            firebase           : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase]
+    ]
+
+    def testLibs = [
+            junit   : [group: 'junit', name: 'junit', version: versionJUnit],
+            espresso: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: versionEspresso]
+    ]
+
+    def supportAnnotationsExclude = {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    applicationModuleDependencies = [
+            [configuration: "implementation", dependency: libs.appCompat],
+            [configuration: "implementation", dependency: libs.kotlin],
+            [configuration: "implementation", dependency: libs.dagger],
+            [configuration: "implementation", dependency: libs.constraintLayout],
+            [configuration: "implementation", dependency: libs.design],
+            [configuration: "kapt", dependency: libs.daggerCompiler],
+            [configuration: "kapt", dependency: libs.dataBindingCompiler],
+            [configuration: "testImplementation", dependency: testLibs.junit],
+            [configuration: "androidTestImplementation", dependency: testLibs.espresso,
+             options      : supportAnnotationsExclude]
+
+    ]
+
+    def plugins = [
+            kotlin_android          : 'kotlin-android',
+            kotlin_kapt             : 'kotlin-kapt',
+            kotlin_android_extension: 'kotlin-android-extensions',
+            kotlin                  : 'kotlin',
+            java                    : 'java'
+    ]
+
+    applicationModulePlugins = [plugins.kotlin_android, plugins.kotlin_android_extension, plugins.kotlin_kapt]
+}

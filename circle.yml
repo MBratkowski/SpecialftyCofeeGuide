@@ -1,0 +1,46 @@
+general:
+  branches:
+    only:
+      - master # list of branches to build
+      - develop
+      - /feature\/.*/
+      - /bugfix\/.*/
+      - /release\/.*/
+## Customize the test machine
+machine:
+
+  ## Add some environment variables
+  environment:
+    TERM: "dumb"
+    ADB_INSTALL_TIMEOUT: "10"
+    GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:MaxPermSize=1024m -Xms512m -XX:+HeapDumpOnOutOfMemoryError"'
+
+  java:
+    version: openjdk8
+
+## Customize dependencies
+dependencies:
+  pre:
+    - sh ./ci/setup-android-sdk.sh
+    - mkdir -p ${ANDROID_HOME}/licenses
+    - mkdir "$ANDROID_HOME/licenses" || true
+    - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
+    - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
+    - echo $GOOGLE_SERVICES | base64 --decode > ~/train-timetable/mobile/google-services.json
+  override:
+    - ./gradlew dependencies || true
+  post:
+    - ./gradlew assembleDebug
+## - ./gradlew check
+
+## Customize test commands
+test:
+  post:
+## - sh ./ci/copy-unit-result.sh
+
+## Customize deployment commands
+deployment:
+  beta:
+    branch: develop
+    commands:
+      - sh ./ci/deploy-beta.sh

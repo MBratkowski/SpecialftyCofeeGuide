@@ -1,0 +1,27 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.ajoberstar:grgit:1.8.0'
+    }
+}
+
+def defaultVersion = "1.0"
+
+ext {
+    git = org.ajoberstar.grgit.Grgit.open(currentDir: "$projectDir/..")
+    gitVersionName = git.describe()
+    if (!gitVersionName) {
+        gitSha = 'git rev-parse --short HEAD'.execute([], project.rootDir).text.trim()
+        gitVersionName = "$defaultVersion-$gitSha"
+    }
+    gitVersionCode = git.tag.list().size()
+    gitVersionCodeTime = git.head().time
+}
+
+task printVersion() {
+    println("Version Name: $gitVersionName")
+    println("Version Code: $gitVersionCode")
+    println("Version Code Time: $gitVersionCodeTime")
+}

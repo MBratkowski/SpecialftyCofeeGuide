@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!--
+PMD Configuration
+Severity: HARD
+-->
+<ruleset
+    name="ruleset"
+    xmlns="http://pmd.sf.net/ruleset/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
+    xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+    <description>Custom ruleset for Tooploox Android application</description>
+
+    <exclude-pattern>.*/R.java</exclude-pattern>
+    <exclude-pattern>.*/gen/.*</exclude-pattern>
+    <exclude-pattern>.*/test/.*</exclude-pattern>
+
+    <description>POM rule set file</description>
+
+    <rule ref="rulesets/java/android.xml" />
+
+    <rule ref="rulesets/java/basic.xml">
+        <exclude name="AvoidUsingHardCodedIP" />
+    </rule>
+
+    <rule ref="rulesets/java/braces.xml" />
+
+    <rule ref="rulesets/java/clone.xml" />
+
+    <rule ref="rulesets/java/codesize.xml">
+        <exclude name="StdCyclomaticComplexity" />
+        <exclude name="ModifiedCyclomaticComplexity" />
+        <exclude name="ExcessiveParameterList" />
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/ExcessiveMethodLength">
+        <properties>
+            <property name="minimum" value="100" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/ExcessiveClassLength">
+        <properties>
+            <property name="minimum" value="1000" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/CyclomaticComplexity">
+        <properties>
+            <property name="reportLevel" value="11" />
+            <property name="showClassesComplexity" value="false" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/TooManyMethods">
+        <properties>
+            <property name="maxmethods" value="30" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/java/codesize.xml/TooManyFields">
+        <properties>
+            <property name="maxfields" value="40" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/java/controversial.xml">
+        <exclude name="UnnecessaryConstructor" />
+        <exclude name="NullAssignment" />
+        <exclude name="OnlyOneReturn" />
+        <!-- while ((x = update()) != null) { process(x); } -->
+        <exclude name="AssignmentInOperand" />
+        <exclude name="AtLeastOneConstructor" />
+        <exclude name="CallSuperInConstructor" />
+        <exclude name="AvoidFinalLocalVariable" />
+        <exclude name="DataflowAnomalyAnalysis" />
+        <exclude name="DefaultPackage" />
+        <exclude name="AvoidPrefixingMethodParameters" />
+        <exclude name="AvoidLiteralsInIfCondition" />
+    </rule>
+
+    <rule ref="rulesets/java/coupling.xml">
+        <exclude name="ExcessiveImports" />
+        <exclude name="LawOfDemeter" />
+        <exclude name="LoosePackageCoupling" />
+    </rule>
+
+    <rule ref="rulesets/java/design.xml">
+        <!-- Android listeners contain a lot of such switch statements -->
+        <exclude name="TooFewBranchesForASwitchStatement" />
+        <exclude name="FieldDeclarationsShouldBeAtStartOfClass" />
+        <exclude name="ConfusingTernary" />
+        <!-- Doesn't give us much, but may be removed at some point -->
+        <exclude name="GodClass" />
+    </rule>
+
+    <rule ref="rulesets/java/empty.xml" />
+
+    <rule ref="rulesets/java/finalizers.xml" />
+
+    <rule ref="rulesets/java/imports.xml">
+        <exclude name="TooManyStaticImports" />
+    </rule>
+
+    <rule ref="rulesets/java/junit.xml" />
+
+    <rule ref="rulesets/java/logging-jakarta-commons.xml">
+        <exclude name="GuardLogStatement" />
+    </rule>
+
+    <rule ref="rulesets/java/logging-java.xml">
+        <exclude name="GuardLogStatementJavaUtil" />
+    </rule>
+
+    <rule ref="rulesets/java/strictexception.xml">
+        <exclude name="SignatureDeclareThrowsException" />
+        <exclude name="AvoidThrowingNullPointerException"/>
+    </rule>
+    <rule ref="rulesets/java/typeresolution.xml">
+        <exclude name="SignatureDeclareThrowsException" />
+    </rule>
+
+    <rule ref="rulesets/java/naming.xml">
+        <!-- ??? -->
+        <exclude name="AbstractNaming" />
+        <exclude name="ShortMethodName" />
+        <exclude name="ShortClassName" />
+        <!-- todo: Modify to exclude only for 'id', 'fm', etc. in the future -->
+        <exclude name="ShortVariable" />
+        <exclude name="AvoidFieldNameMatchingTypeName" />
+        <exclude name="VariableNamingConventions" />
+        <exclude name="GenericsNaming" />
+        <exclude name="AvoidFieldNameMatchingMethodName" />
+    </rule>
+    <rule ref="rulesets/java/naming.xml/LongVariable">
+        <properties>
+            <property name="minimum" value="35" />
+        </properties>
+    </rule>
+
+    <rule ref="rulesets/java/migrating.xml" />
+
+    <rule ref="rulesets/java/optimizations.xml">
+        <exclude name="MethodArgumentCouldBeFinal" />
+        <exclude name="LocalVariableCouldBeFinal" />
+    </rule>
+
+    <rule ref="rulesets/java/optimizations.xml/AvoidInstantiatingObjectsInLoops">
+        <priority>4</priority>
+    </rule>
+
+    <rule ref="rulesets/java/strings.xml" />
+
+    <rule ref="rulesets/java/unnecessary.xml" />
+
+    <rule ref="rulesets/java/unusedcode.xml">
+        <exclude name="UnusedFormalParameter" />
+    </rule>
+
+</ruleset>

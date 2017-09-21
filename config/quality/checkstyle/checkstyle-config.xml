@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<!--
+Checkstyle Configuration
+Severity: HARD
+-->
+<module name="Checker">
+
+    <!-- Checks whether files end with a new line.                        -->
+    <!-- See http://checkstyle.sourceforge.net/config_misc.html#NewlineAtEndOfFile -->
+    <module name="NewlineAtEndOfFile" />
+
+    <!-- Checks for Size Violations.                    -->
+    <!-- See http://checkstyle.sourceforge.net/config_sizes.html -->
+    <module name="FileLength">
+        <property name="severity" value="warning" />
+    </module>
+
+    <!-- Checks for whitespace                               -->
+    <!-- See http://checkstyle.sourceforge.net/config_whitespace.html -->
+    <module name="FileTabCharacter" />
+
+    <!-- Miscellaneous other checks.                   -->
+    <!-- See http://checkstyle.sourceforge.net/config_misc.html -->
+    <module name="RegexpSingleline">
+        <property name="format" value="\s+$" />
+        <property name="minimum" value="0" />
+        <property name="maximum" value="0" />
+        <property name="message" value="Line has trailing spaces." />
+        <property name="severity" value="warning" />
+    </module>
+
+    <!-- Prohibit consecutive empty lines (except the lines after package/import) -->
+    <module name="RegexpMultiline">
+        <property name="format" value="\n *(?!package )(?!import )[^\n]+\n{3,}" />
+        <property name="message" value="two or more consecutive empty lines" />
+    </module>
+
+    <module name="TreeWalker">
+
+        <module name="EmptyLineSeparator">
+            <property name="allowMultipleEmptyLines" value="false" />
+            <property name="allowNoEmptyLineBetweenFields" value="true" />
+        </module>
+
+        <!-- Checks for Javadoc comments.                     -->
+        <!-- See http://checkstyle.sourceforge.net/config_javadoc.html -->
+        <module name="JavadocMethod">
+            <property name="scope" value="package" />
+            <property name="allowMissingParamTags" value="true" />
+            <property name="allowMissingThrowsTags" value="true" />
+            <property name="allowMissingReturnTag" value="true" />
+            <property name="allowThrowsTagsForSubclasses" value="true" />
+            <property name="allowUndeclaredRTE" value="true" />
+            <property name="allowMissingPropertyJavadoc" value="true" />
+            <property name="severity" value="ignore" />
+        </module>
+        <module name="JavadocType">
+            <property name="scope" value="package" />
+            <property name="severity" value="ignore" />
+        </module>
+        <module name="JavadocVariable">
+            <property name="scope" value="package" />
+            <property name="severity" value="ignore" />
+        </module>
+        <module name="JavadocStyle">
+            <property name="checkEmptyJavadoc" value="true" />
+            <property name="severity" value="ignore" />
+        </module>
+
+        <!-- Checks for Naming Conventions.                  -->
+        <!-- See http://checkstyle.sourceforge.net/config_naming.html -->
+        <module name="ConstantName" />
+        <module name="LocalFinalVariableName" />
+        <module name="LocalVariableName" />
+        <module name="MethodName" />
+        <module name="PackageName" />
+        <module name="ParameterName" />
+        <module name="StaticVariableName" />
+        <module name="TypeName" />
+
+        <!-- Checks for imports                              -->
+        <!-- See http://checkstyle.sourceforge.net/config_imports.html -->
+        <module name="AvoidStarImport">
+            <property name="allowStaticMemberImports" value="true" />
+        </module>
+        <module name="IllegalImport" />
+        <!-- defaults to sun.* packages -->
+        <module name="RedundantImport" />
+        <module name="UnusedImports">
+            <property name="processJavadoc" value="true" />
+        </module>
+
+        <!-- todo: Import order -->
+
+        <!-- Checks for Size Violations.                    -->
+        <!-- See http://checkstyle.sourceforge.net/config_sizes.html -->
+        <module name="LineLength">
+            <property name="max" value="140" />
+            <!-- ignore lines like "$File: //depot/... $" -->
+            <property name="ignorePattern" value="\$File.*\$" />
+            <property name="severity" value="error" />
+        </module>
+        <module name="MethodLength" />
+        <module name="ParameterNumber">
+            <!-- Don't check constructors -->
+            <property name="max" value="10"/>
+            <property name="tokens" value="METHOD_DEF" />
+        </module>
+
+        <!-- Checks for whitespace                               -->
+        <!-- See http://checkstyle.sourceforge.net/config_whitespace.html -->
+        <module name="EmptyForIteratorPad" />
+        <module name="GenericWhitespace" />
+        <module name="MethodParamPad" />
+        <module name="NoWhitespaceAfter" />
+        <module name="NoWhitespaceBefore" />
+        <module name="OperatorWrap" />
+        <module name="ParenPad" />
+        <module name="TypecastParenPad" />
+        <module name="WhitespaceAfter" />
+        <module name="WhitespaceAround">
+            <property name="allowEmptyTypes" value="true" />
+        </module>
+
+        <!-- Modifier Checks                                    -->
+        <!-- See http://checkstyle.sourceforge.net/config_modifier.html -->
+        <module name="ModifierOrder" />
+        <module name="RedundantModifier" />
+
+        <!-- Checks for blocks. You know, those {}'s         -->
+        <!-- See http://checkstyle.sourceforge.net/config_blocks.html -->
+        <module name="AvoidNestedBlocks" />
+        <module name="EmptyBlock">
+            <property name="option" value="text" />
+        </module>
+        <module name="LeftCurly" />
+        <module name="NeedBraces" />
+        <module name="RightCurly" />
+
+        <!-- Checks for common coding problems               -->
+        <!-- See http://checkstyle.sourceforge.net/config_coding.html -->
+        <module name="EmptyStatement" />
+        <module name="EqualsHashCode" />
+
+        <!-- Ignored until Checkstyle doesn't flag fields of inner static classes (Builders)
+        <module name="HiddenField">
+            <property name="ignoreConstructorParameter" value="true" />
+            <property name="ignoreSetter" value="true" />
+            <property name="severity" value="warning" />
+        </module>
+        -->
+
+        <module name="IllegalInstantiation" />
+        <module name="InnerAssignment" />
+        <module name="MagicNumber">
+            <property name="severity" value="warning" />
+            <property name="ignoreNumbers"
+                value="-1, 0, 0.5, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 24, 30, 31, 32, 60, 64, 100, 120, 128, 180, 256, 360, 1000, 1024" />
+        </module>
+        <module name="MissingSwitchDefault" />
+        <module name="SimplifyBooleanExpression" />
+        <module name="SimplifyBooleanReturn" />
+
+        <!-- Checks for class design                         -->
+        <!-- See http://checkstyle.sourceforge.net/config_design.html -->
+        <module name="FinalClass" />
+        <module name="HideUtilityClassConstructor" />
+        <module name="InterfaceIsType" />
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true" />
+            <property name="packageAllowed" value="true" />
+        </module>
+
+        <!-- Miscellaneous other checks.                   -->
+        <!-- See http://checkstyle.sourceforge.net/config_misc.html -->
+        <module name="ArrayTypeStyle" />
+
+        <module name="UpperEll" />
+
+        <module name="SuppressWarningsHolder" />
+        <module name="FileContentsHolder" />
+    </module>
+
+    <module name="SuppressionCommentFilter" />
+
+</module>

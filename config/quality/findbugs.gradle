@@ -1,0 +1,34 @@
+apply plugin: 'findbugs'
+
+def qualityConfigDir = "$project.rootDir/config/quality";
+def reportsDir = "$project.buildDir/reports"
+
+check.dependsOn 'findbugs'
+
+task findbugs(type: FindBugs,
+        group: 'Verification',
+        description: 'Inspect release java bytecode for bugs') {
+
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("$qualityConfigDir/findbugs/android-exclude-filter.xml")
+    classes = files("$project.rootDir/app/build/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$reportsDir/findbugs/findbugs.xml"
+        }
+        html {
+            destination "$reportsDir/findbugs/findbugs.html"
+        }
+    }
+
+    classpath = files()
+}
