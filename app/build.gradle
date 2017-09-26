@@ -12,6 +12,7 @@ android {
     compileSdkVersion ext.android.compileSdkVersion
     buildToolsVersion ext.android.buildToolsVersion
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "io.bratexsoft.specialtycofeecode"
         minSdkVersion ext.android.minSdkVersion
         targetSdkVersion ext.android.targetSdkVersion

@@ -6,5 +6,7 @@ class SpecialtyCoffeGuideApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        SpecialtyCoffeGuideInjector.INSTANCE.app = this
+        SpecialtyCoffeGuideInjector.INSTANCE.appComponent.inject(this)
     }
 }

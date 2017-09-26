@@ -8,7 +8,7 @@ ext {
     ]
     build = [
             gradle      : "3.0.0-beta6",
-            kotlin      : "1.1.4-3",
+            kotlin      : "1.1.50",
             playServices: "3.1.0"
     ]
 
@@ -33,6 +33,7 @@ ext {
     def libs = [
             appCompat          : [group: 'com.android.support', name: 'appcompat-v7', version: androidSupportLibs],
             constraintLayout   : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraint],
+            cardView           : [group: 'com.android.support', name: 'cardview-v7', version: androidSupportLibs],
             kotlin             : [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre7', version: build.kotlin],
             rxJava             : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionRxJava],
             rxAndroid          : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionRxAndroid],
@@ -60,6 +61,7 @@ ext {
     applicationModuleDependencies = [
             [configuration: "implementation", dependency: libs.appCompat],
             [configuration: "implementation", dependency: libs.kotlin],
+            [configuration: "implementation", dependency: libs.cardView],
             [configuration: "implementation", dependency: libs.dagger],
             [configuration: "implementation", dependency: libs.constraintLayout],
             [configuration: "implementation", dependency: libs.design],
