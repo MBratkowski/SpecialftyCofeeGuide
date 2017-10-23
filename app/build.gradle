@@ -47,4 +47,6 @@ dependencies {
     rootProject.applicationModuleDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
+
 }
+

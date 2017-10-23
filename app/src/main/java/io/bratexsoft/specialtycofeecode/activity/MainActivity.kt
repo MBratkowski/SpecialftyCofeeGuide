@@ -11,6 +11,13 @@ import io.bratexsoft.specialtycofeecode.mvp.presenter.MainPresenter
 import javax.inject.Inject
 
 class MainActivity : BaseActivity<MainActivityBinding, MainContract.View, MainPresenter>(), MainContract.View {
+    override fun attachViewToPresenter(presenter: MainPresenter) {
+        presenter.onTakeView(this)
+    }
+
+    override fun attachPresenterToDataBinding(presenter: MainPresenter, binding: MainActivityBinding) {
+        
+    }
 
     @Inject
     lateinit var pageAdapter: MainFragmentPagerAdapter
@@ -24,12 +31,7 @@ class MainActivity : BaseActivity<MainActivityBinding, MainContract.View, MainPr
         activityComponent.plusModule(MainModule()).inject(this)
     }
 
-    override fun attachViewToPresenter(presenter: MainPresenter) {
-        presenter.onTakeView(this)
-    }
 
-    override fun attachPresenterToDataBinding(presenter: MainPresenter, binding: MainActivityBinding) {
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

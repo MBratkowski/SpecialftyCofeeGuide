@@ -1,13 +1,13 @@
 ext {
     android = [
             compileSdkVersion : 26,
-            buildToolsVersion : "26.0.1",
+            buildToolsVersion : "26.0.2",
             minSdkVersion     : 19,
             minSdkDebugVersion: 21,
             targetSdkVersion  : 26,
     ]
     build = [
-            gradle      : "3.0.0-beta6",
+            gradle      : "3.0.0-rc2",
             kotlin      : "1.1.50",
             playServices: "3.1.0"
     ]
