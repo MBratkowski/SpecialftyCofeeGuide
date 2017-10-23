@@ -16,7 +16,7 @@ class MainActivity : BaseActivity<MainActivityBinding, MainContract.View, MainPr
     }
 
     override fun attachPresenterToDataBinding(presenter: MainPresenter, binding: MainActivityBinding) {
-        
+
     }
 
     @Inject
