@@ -1,14 +1,14 @@
 ext {
     android = [
-            compileSdkVersion : 26,
-            buildToolsVersion : "26.0.1",
+            compileSdkVersion : 27,
+            buildToolsVersion : "27.0.3",
             minSdkVersion     : 19,
             minSdkDebugVersion: 21,
-            targetSdkVersion  : 26,
+            targetSdkVersion  : 27,
     ]
     build = [
-            gradle      : "3.0.0-beta6",
-            kotlin      : "1.1.50",
+            gradle      : "3.0.0",
+            kotlin      : "1.2.10",
             playServices: "3.1.0"
     ]
 
@@ -18,35 +18,49 @@ ext {
             kotlin      : "org.jetbrains.kotlin:kotlin-gradle-plugin:$build.kotlin"
     ]
 
-    def androidSupportLibs = '26.1.0'
+    def androidSupportLibs = '27.0.2'
     def versionJUnit = '4.12'
     def versionEspresso = '2.2.2'
-    def versionRxJava = '2.1.0'
-    def versionRxKotlin = '2.0.3'
+    def versionRxJava = '2.1.7'
+    def versionRxKotlin = '2.2.0'
     def versionRxAndroid = '2.0.1'
-    def versionDagger = '2.11'
+    def versionDagger = '2.14'
     def versionConstraint = '1.0.2'
-    def versionJavax = '1'
     def versionFirebase = '11.2.0'
-    def versionPresistence = '1.0.0-alpha9'
+    def versionPresistence = '1.0.0'
+    def versionLifecycle = '1.0.0'
+    def versionBottomNavigation = '2.1.0'
+    def versionGlide = '4.5.0'
+    def versionOkhttp = '3.9.1'
+    def versionGson = '2.8.2'
+    def versionRetrofit = '2.3.0'
 
     def libs = [
-            appCompat          : [group: 'com.android.support', name: 'appcompat-v7', version: androidSupportLibs],
-            constraintLayout   : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraint],
-            cardView           : [group: 'com.android.support', name: 'cardview-v7', version: androidSupportLibs],
-            kotlin             : [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre7', version: build.kotlin],
-            rxJava             : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionRxJava],
-            rxAndroid          : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionRxAndroid],
-            rxKotlin           : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: versionRxKotlin],
-            dagger             : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
-            javax              : [group: 'javax.inject', name: 'javax.inject', version: '1'],
-            daggerCompiler     : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger],
-            dataBindingCompiler: [group: 'com.android.databinding', name: 'compiler', version: build.gradle],
-            design             : [group: 'com.android.support', name: 'design', version: androidSupportLibs],
-            persistence        : [group: 'android.arch.persistence.room', name: 'runtime', version: versionPresistence],
-            persistenceRx      : [group: 'android.arch.persistence.room', name: 'rxjava2', version: versionPresistence],
-            persistenceCompiler: [group: 'android.arch.persistence.room', name: 'compiler', version: versionPresistence],
-            firebase           : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase]
+            appCompat            : [group: 'com.android.support', name: 'appcompat-v7', version: androidSupportLibs],
+            constraintLayout     : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraint],
+            cardView             : [group: 'com.android.support', name: 'cardview-v7', version: androidSupportLibs],
+            kotlin               : [group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jre7', version: build.kotlin],
+            rxJava               : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionRxJava],
+            rxAndroid            : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionRxAndroid],
+            rxKotlin             : [group: 'io.reactivex.rxjava2', name: 'rxkotlin', version: versionRxKotlin],
+            dagger               : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
+            javax                : [group: 'javax.inject', name: 'javax.inject', version: '1'],
+            daggerCompiler       : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger],
+            dataBindingCompiler  : [group: 'com.android.databinding', name: 'compiler', version: build.gradle],
+            lifecycleCompiler    : [group: 'android.arch.lifecycle', name: 'compiler', version: build.gradlde],
+            lifecycle            : [group: 'android.arch.lifecycle', name: 'extensions', version: versionLifecycle],
+            design               : [group: 'com.android.support', name: 'design', version: androidSupportLibs],
+            persistence          : [group: 'android.arch.persistence.room', name: 'runtime', version: versionPresistence],
+            persistenceRx        : [group: 'android.arch.persistence.room', name: 'rxjava2', version: versionPresistence],
+            persistenceCompiler  : [group: 'android.arch.persistence.room', name: 'compiler', version: versionPresistence],
+            firebase             : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase],
+            bottomNavigtation    : [group: 'com.aurelhubert', name: 'ahbottomnavigation', version: versionBottomNavigation],
+            glide                : [group: 'com.github.bumptech.glide', name: 'glide', version: versionGlide],
+            glideCompiler        : [group: 'com.github.bumptech.glide', name: 'compiler', version: versionGlide],
+            okHttp               : [group: 'com.squareup.okhttp3', name: "okhttp", version: versionOkhttp],
+            gson                 : [group: 'com.google.code.gson', name: 'gson', version: versionGson],
+            retrofit             : [group: 'com.squareup.retrofit2', name: 'retrofit', version: versionRetrofit],
+            retrofitGsonConverter: [group: 'com.squareup.retrofit2', name: 'converter-gson', version: versionRetrofit]
     ]
 
     def testLibs = [
@@ -65,6 +79,13 @@ ext {
             [configuration: "implementation", dependency: libs.dagger],
             [configuration: "implementation", dependency: libs.constraintLayout],
             [configuration: "implementation", dependency: libs.design],
+            [configuration: "implementation", dependency: libs.bottomNavigtation],
+            [configuration: "implementation", dependency: libs.glide],
+            [configuration: "implementation", dependency: libs.okHttp],
+            [configuration: "implementation", dependency: libs.gson],
+            [configuration: "implementation", dependency: libs.retrofit],
+            [configuration: "implementation", dependency: libs.retrofitGsonConverter],
+            [configuration: "kapt", dependency: libs.glideCompiler],
             [configuration: "kapt", dependency: libs.daggerCompiler],
             [configuration: "kapt", dependency: libs.dataBindingCompiler],
             [configuration: "testImplementation", dependency: testLibs.junit],
@@ -72,14 +93,4 @@ ext {
              options      : supportAnnotationsExclude]
 
     ]
-
-    def plugins = [
-            kotlin_android          : 'kotlin-android',
-            kotlin_kapt             : 'kotlin-kapt',
-            kotlin_android_extension: 'kotlin-android-extensions',
-            kotlin                  : 'kotlin',
-            java                    : 'java'
-    ]
-
-    applicationModulePlugins = [plugins.kotlin_android, plugins.kotlin_android_extension, plugins.kotlin_kapt]
 }
