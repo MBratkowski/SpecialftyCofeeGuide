@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SpecialtyCofeeGuide</string>
+    <string name="bottom_navigation_page_one">map</string>
+    <string name="bottom_navigation_page_two">explore</string>
+    <string name="bottom_navigation_page_three">profile</string>
 </resources>
