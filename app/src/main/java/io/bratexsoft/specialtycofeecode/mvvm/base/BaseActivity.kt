@@ -1,5 +1,6 @@
-package io.bratexsoft.specialtycofeecode.activity
+package io.bratexsoft.specialtycofeecode.mvvm.base
 
+import android.arch.lifecycle.ViewModel
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -10,14 +11,12 @@ import io.bratexsoft.specialtycofeecode.di.component.ActivityComponent
 import io.bratexsoft.specialtycofeecode.di.component.ApplicationComponent
 import io.bratexsoft.specialtycofeecode.di.component.DaggerActivityComponent
 import io.bratexsoft.specialtycofeecode.di.module.activity.ActivityModule
-import io.bratexsoft.specialtycofeecode.mvp.presenter.BasePresenter
-import io.bratexsoft.specialtycofeecode.mvp.view.BaseView
 import javax.inject.Inject
 
-abstract class BaseActivity<B : ViewDataBinding, V : BaseView, P : BasePresenter<V>> : AppCompatActivity() {
+abstract class BaseActivity<B : ViewDataBinding, VM : ViewModel> : AppCompatActivity() {
 
     @Inject
-    lateinit var presenter: P
+    lateinit var viewModel: VM
 
     lateinit var binding: B
 
@@ -33,16 +32,10 @@ abstract class BaseActivity<B : ViewDataBinding, V : BaseView, P : BasePresenter
 
     abstract fun performFieldInjection(activityComponent: ActivityComponent)
 
-    abstract fun attachViewToPresenter(presenter: P)
-
-    abstract fun attachPresenterToDataBinding(presenter: P, binding: B)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         performFieldInjection(activityComponent)
         binding = DataBindingUtil.setContentView(this, getLayoutRest())
-        attachPresenterToDataBinding(presenter, binding)
-        attachViewToPresenter(presenter)
     }
 
     private fun getApplicationComponent(): ApplicationComponent = SpecialtyCoffeGuideInjector.INSTANCE.appComponent
