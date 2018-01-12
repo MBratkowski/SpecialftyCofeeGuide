@@ -68,7 +68,6 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
         binding.recycler.adapter = PlacesAdapter(this)
         binding.recycler.layoutManager = initLayoutManager()
         binding.recycler.setHasFixedSize(true)
-
     }
 
     private fun initLayoutManager(): RecyclerView.LayoutManager {

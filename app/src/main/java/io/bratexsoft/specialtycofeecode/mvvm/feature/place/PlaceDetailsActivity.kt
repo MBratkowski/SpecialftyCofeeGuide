@@ -27,6 +27,4 @@ class PlaceDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.place_details_activity)
     }
-
-   // private fun
 }

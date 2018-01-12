@@ -1,16 +1,13 @@
 package io.bratexsoft.specialtycofeecode.di.module.activity
 
 import android.arch.lifecycle.ViewModelProviders
-import android.content.res.Resources
 import android.support.v7.app.AppCompatActivity
 import dagger.Module
 import dagger.Provides
 import io.bratexsoft.specialtycofeecode.R
 import io.bratexsoft.specialtycofeecode.di.scope.PerView
 import io.bratexsoft.specialtycofeecode.domain.GetPlacesUseCase
-import io.bratexsoft.specialtycofeecode.mvvm.feature.places.PlacesAdapter
 import io.bratexsoft.specialtycofeecode.mvvm.feature.places.PlacesViewModel
-import io.bratexsoft.specialtycofeecode.repository.RestaurantRepository
 import io.bratexsoft.specialtycofeecode.repository.model.Constant
 import io.bratexsoft.specialtycofeecode.repository.remote.PlacesRepositoryRemote
 import io.bratexsoft.specialtycofeecode.support.LocationHelper
@@ -20,11 +17,7 @@ import io.bratexsoft.specialtycofeecode.support.LocationHelper
  */
 @Module
 class PlacesModule {
-
-    @PerView
-    @Provides
-    fun provideRepository(): RestaurantRepository = RestaurantRepository()
-
+    
     @Provides
     @PerView
     fun provideLocationHelper(activity: AppCompatActivity): LocationHelper = LocationHelper(activity)

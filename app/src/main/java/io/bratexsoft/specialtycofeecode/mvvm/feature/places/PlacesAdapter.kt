@@ -34,7 +34,7 @@ class PlacesAdapter(private val listener: ItemClickListener) : RecyclerView.Adap
         return BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),
                 viewType,
                 parent,
-                false), listener)
+                false))
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
