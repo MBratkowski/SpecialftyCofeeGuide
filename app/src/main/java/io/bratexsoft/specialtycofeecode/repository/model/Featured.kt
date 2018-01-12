@@ -1,10 +1,32 @@
 package io.bratexsoft.specialtycofeecode.repository.model
 
 import com.google.gson.annotations.SerializedName
+import io.bratexsoft.specialtycofeecode.R
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
+
+fun Featured.processSpecialization(map: HashMap<String, String>): String {
+    var specialization = ""
+    if (aeropress) {
+        specialization += (map[Constant.TYPE_AEROPRESS]) + ","
+    }
+    if (chemex) {
+        specialization += " " + (map[Constant.TYPE_CHEMEX]) + ","
+    }
+    if (coldbrew) {
+        specialization += " " + (map[Constant.TYPE_COLD_BREW]) + ","
+    }
+    if (drip) {
+        specialization += " " + (map[Constant.TYPE_DRIP]) + ","
+    }
+    if (syphon) {
+        specialization += " " + (map[Constant.TYPE_SYPHON]) + ","
+    }
+    specialization = specialization.removeSuffix(",")
+    return specialization
+}
 
 data class Featured(
         @SerializedName("fbid")

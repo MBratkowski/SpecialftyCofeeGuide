@@ -18,6 +18,7 @@ import io.bratexsoft.specialtycofeecode.widget.BaseViewHolder
 class PlacesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     companion object {
+        const val LAYOUT_MANAGER_GRID = 2
         const val ONE_COLUMN_GRID = 2
         const val TWO_COLUMNS_GRID = 1
     }
@@ -29,7 +30,7 @@ class PlacesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
         }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<ViewDataBinding> {
-        return BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),
+       return BaseViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent?.context),
                 viewType,
                 parent,
                 false))

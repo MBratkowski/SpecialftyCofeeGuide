@@ -10,11 +10,12 @@ import io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.BottomItemViewM
 import io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.FeaturedItemViewModel
 import io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.PlacesType
 import io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.RegularItemViewModel
+import io.bratexsoft.specialtycofeecode.repository.model.processSpecialization
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
-class PlacesViewModel(private val useCase: GetPlacesUseCase) : ViewModel() {
+class PlacesViewModel(private val useCase: GetPlacesUseCase, private val map: HashMap<String, String>) : ViewModel() {
 
     private var data: MediatorLiveData<MutableList<PlacesType>> = MediatorLiveData()
 
@@ -27,6 +28,7 @@ class PlacesViewModel(private val useCase: GetPlacesUseCase) : ViewModel() {
                 val headerItemVIew = FeaturedItemViewModel()
                 headerItemVIew.restaurantName.set(it.name)
                 headerItemVIew.restaurantImage.set(it.coverURL)
+                headerItemVIew.restaurantSpecialization.set(it.processSpecialization(map))
                 listOfPlaces.add(headerItemVIew)
             }
 
@@ -34,6 +36,7 @@ class PlacesViewModel(private val useCase: GetPlacesUseCase) : ViewModel() {
                 val regularItemView = RegularItemViewModel()
                 regularItemView.restaurantName.set(it.name)
                 regularItemView.restaurantImage.set(it.thumbnailURL)
+                regularItemView.restaurantSpecialization.set(it.processSpecialization(map))
                 listOfPlaces.add(regularItemView)
             }
 
@@ -46,9 +49,10 @@ class PlacesViewModel(private val useCase: GetPlacesUseCase) : ViewModel() {
         return data
     }
 
-    class Factory constructor(private val useCase: GetPlacesUseCase) : ViewModelProvider.Factory {
+
+    class Factory constructor(private val useCase: GetPlacesUseCase, private val map: HashMap<String,String>) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            return PlacesViewModel(useCase) as T
+            return PlacesViewModel(useCase, map) as T
         }
     }
 

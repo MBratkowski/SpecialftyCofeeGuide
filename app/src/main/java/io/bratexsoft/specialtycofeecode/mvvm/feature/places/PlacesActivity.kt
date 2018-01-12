@@ -4,6 +4,7 @@ import android.Manifest
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -31,11 +32,10 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
                                             permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             0 -> {
-                // If request is cancelled, the result arrays are empty.
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     val locationManager: LocationManager = this.applicationContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-                    viewModel.getPlaces(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)).observe(this, Observer {
+                    viewModel.getPlaces(Location("New place")).observe(this, Observer {
                         it?.let {
                             val adapter = binding.recycler.adapter as PlacesAdapter
                             adapter.listItem = it.toList()
@@ -43,7 +43,6 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
                     })
 
                 } else {
-
 
                 }
                 return
@@ -54,11 +53,8 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRecycler()
-
-
-
-        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION), 0)
+        initToolbar()
+        requestToPermission()
     }
 
     private fun initRecycler() {
@@ -69,7 +65,7 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
     }
 
     private fun initLayoutManager(): RecyclerView.LayoutManager {
-        val layoutManager = GridLayoutManager(this, 2)
+        val layoutManager = GridLayoutManager(this, PlacesAdapter.LAYOUT_MANAGER_GRID)
         layoutManager.spanSizeLookup = (object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return when (position) {
@@ -81,5 +77,15 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
         })
 
         return layoutManager
+    }
+
+    private fun initToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Some title"
+    }
+
+    private fun requestToPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION), 0)
     }
 }
