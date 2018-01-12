@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="listener"
+            type="io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.ItemClickListener" />
+
+        <variable
             name="viewModel"
             type="io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.FeaturedItemViewModel" />
     </data>
@@ -14,11 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="8dp"
+        android:onClick="@{()-> listener.onRegularItemClick(viewModel.place)}"
         android:shadowColor="@color/charlotGrey"
         app:cardBackgroundColor="@color/cardview_dark_background"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp">
-
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"

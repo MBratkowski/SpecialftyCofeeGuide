@@ -15,12 +15,15 @@ import io.bratexsoft.specialtycofeecode.databinding.PlacesActivityBinding
 import io.bratexsoft.specialtycofeecode.di.component.ActivityComponent
 import io.bratexsoft.specialtycofeecode.di.module.activity.PlacesModule
 import io.bratexsoft.specialtycofeecode.mvvm.base.BaseActivity
+import io.bratexsoft.specialtycofeecode.mvvm.feature.place.PlaceDetailsActivity
+import io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.ItemClickListener
+import io.bratexsoft.specialtycofeecode.repository.model.Place
 
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
-class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), ActivityCompat.OnRequestPermissionsResultCallback {
+class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), ActivityCompat.OnRequestPermissionsResultCallback, ItemClickListener {
 
     override fun getLayoutRest(): Int = R.layout.places_activity
 
@@ -50,6 +53,10 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
         }
     }
 
+    override fun onRegularItemClick(place: Place) {
+        PlaceDetailsActivity.startActivity(this, place)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRecycler()
@@ -58,7 +65,7 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
     }
 
     private fun initRecycler() {
-        binding.recycler.adapter = PlacesAdapter()
+        binding.recycler.adapter = PlacesAdapter(this)
         binding.recycler.layoutManager = initLayoutManager()
         binding.recycler.setHasFixedSize(true)
 
@@ -81,7 +88,6 @@ class PlacesActivity : BaseActivity<PlacesActivityBinding, PlacesViewModel>(), A
 
     private fun initToolbar() {
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = "Some title"
     }
 
     private fun requestToPermission() {
