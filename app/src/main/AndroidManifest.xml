@@ -24,5 +24,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".mvvm.feature.place.PlaceDetailsActivity" />
+
     </application>
 </manifest>
