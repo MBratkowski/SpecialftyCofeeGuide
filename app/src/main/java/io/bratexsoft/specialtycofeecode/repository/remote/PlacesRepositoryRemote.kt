@@ -18,7 +18,7 @@ import javax.inject.Inject
 class PlacesRepositoryRemote @Inject constructor(private val service: RequestDefinition) : PlacesRepositoryDefinition {
 
     override fun getPlaces(location: Location, data: MutableLiveData<Places>) {
-        service.getRestaurantList(location.latitude.toString(), location.longitude.toString()).enqueue(object : Callback<Places> {
+        service.getRestaurantList("51.1078850", "17.0385380").enqueue(object : Callback<Places> {
             override fun onResponse(call: Call<Places>?, response: Response<Places>?) {
                 data.value = response?.body()
             }
