@@ -1,13 +1,15 @@
 package io.bratexsoft.specialtycofeecode.repository.model
 
+import android.annotation.SuppressLint
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import io.bratexsoft.specialtycofeecode.R
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
 
-fun Featured.processSpecialization(map: HashMap<String, String>): String {
+fun Place.processSpecialization(map: HashMap<String, String>): String {
     var specialization = ""
     if (aeropress) {
         specialization += (map[Constant.TYPE_AEROPRESS]) + ","
@@ -28,7 +30,18 @@ fun Featured.processSpecialization(map: HashMap<String, String>): String {
     return specialization
 }
 
-data class Featured(
+object Constant {
+    const val TYPE_AEROPRESS = "AEROPRESS"
+    const val TYPE_ESPRESSO = "ESPRESSO"
+    const val TYPE_CHEMEX = "CHEMEX"
+    const val TYPE_COLD_BREW = "COLD_BREW"
+    const val TYPE_DRIP = "DRIP"
+    const val TYPE_SYPHON = "SYPHON"
+}
+
+@SuppressLint("ParcelCreator")
+@Parcelize
+data class Place(
         @SerializedName("fbid")
         val fbid: String,
         @SerializedName("espresso")
@@ -62,11 +75,12 @@ data class Featured(
         @SerializedName("facebook")
         val facebook: String,
         @SerializedName("featured")
-        val featured: String,
+        val featured: String?,
         @SerializedName("website")
-        val website: String,
+        val website: String?,
         @SerializedName("latitude")
         val latitude: Double,
         @SerializedName("longitude")
         val longitude: Double
-)
+
+) : Parcelable

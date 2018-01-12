@@ -25,7 +25,7 @@ class PlacesViewModel(private val useCase: GetPlacesUseCase, private val map: Ha
         data.addSource(places, {
             val listOfPlaces: MutableList<PlacesType> = ArrayList()
             places.value?.featured?.map {
-                val headerItemVIew = FeaturedItemViewModel()
+                val headerItemVIew = FeaturedItemViewModel(it)
                 headerItemVIew.restaurantName.set(it.name)
                 headerItemVIew.restaurantImage.set(it.coverURL)
                 headerItemVIew.restaurantSpecialization.set(it.processSpecialization(map))
@@ -33,7 +33,7 @@ class PlacesViewModel(private val useCase: GetPlacesUseCase, private val map: Ha
             }
 
             places.value?.regular?.forEach {
-                val regularItemView = RegularItemViewModel()
+                val regularItemView = RegularItemViewModel(it)
                 regularItemView.restaurantName.set(it.name)
                 regularItemView.restaurantImage.set(it.thumbnailURL)
                 regularItemView.restaurantSpecialization.set(it.processSpecialization(map))
@@ -50,7 +50,7 @@ class PlacesViewModel(private val useCase: GetPlacesUseCase, private val map: Ha
     }
 
 
-    class Factory constructor(private val useCase: GetPlacesUseCase, private val map: HashMap<String,String>) : ViewModelProvider.Factory {
+    class Factory constructor(private val useCase: GetPlacesUseCase, private val map: HashMap<String, String>) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return PlacesViewModel(useCase, map) as T
         }
