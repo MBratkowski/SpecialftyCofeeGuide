@@ -55,8 +55,4 @@ class PlacesModule {
         return ViewModelProviders.of(activity, PlacesViewModel.Factory(useCase, map))
                 .get(PlacesViewModel(useCase, map)::class.java)
     }
-
-    @Provides
-    @PerView
-    fun provideAdapter(): PlacesAdapter = PlacesAdapter()
 }
