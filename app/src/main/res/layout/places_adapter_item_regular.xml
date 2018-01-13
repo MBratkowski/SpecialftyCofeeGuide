@@ -7,18 +7,18 @@
 
         <variable
             name="listener"
-            type="io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.ItemClickListener" />
+            type="cafe.speciality.kochere.mvvm.feature.places.item.ItemClickListener" />
 
         <variable
             name="viewModel"
-            type="io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.RegularItemViewModel" />
+            type="cafe.speciality.kochere.mvvm.feature.places.item.RegularItemViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
-        android:onClick="@{()-> listener.onRegularItemClick(viewModel.place)}"
+        android:onClick="@{(v)-> listener.onRegularItemClick(viewModel.place)}"
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 
