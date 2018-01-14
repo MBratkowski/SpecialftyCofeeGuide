@@ -3,24 +3,46 @@ package cafe.speciality.kochere.di.module.activity
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import cafe.speciality.kochere.R
-import dagger.Module
-import dagger.Provides
 import cafe.speciality.kochere.di.scope.PerView
 import cafe.speciality.kochere.domain.GetPlacesUseCase
+import cafe.speciality.kochere.mvvm.feature.places.PlacesActivity
 import cafe.speciality.kochere.mvvm.feature.places.PlacesViewModel
 import cafe.speciality.kochere.repository.model.Constant
 import cafe.speciality.kochere.repository.remote.PlacesRepositoryRemote
-import cafe.speciality.kochere.support.LocationHelper
+import cafe.speciality.kochere.support.LocationPermissionSupport
+import cafe.speciality.kochere.support.LocationProvider
+import dagger.Module
+import dagger.Provides
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
 @Module
 class PlacesModule {
-    
+
+    @PerView
+    @Provides
+    fun providePlacesActivity(activity: AppCompatActivity): PlacesActivity {
+        return activity as PlacesActivity
+    }
+
+    @PerView
+    @Provides
+    fun provideLocationChangeListener(activity: PlacesActivity): LocationProvider.LocationChangeListener {
+        return activity
+    }
+
+    @PerView
+    @Provides
+    fun provideLocationPermissionSupport(activity: AppCompatActivity): LocationPermissionSupport {
+        return LocationPermissionSupport(activity)
+    }
+
     @Provides
     @PerView
-    fun provideLocationHelper(activity: AppCompatActivity): LocationHelper = LocationHelper(activity)
+    fun provideLocationHelper(activity: AppCompatActivity,
+                              support: LocationPermissionSupport,
+                              listener: LocationProvider.LocationChangeListener): LocationProvider = LocationProvider(activity, support, listener)
 
     @PerView
     @Provides
