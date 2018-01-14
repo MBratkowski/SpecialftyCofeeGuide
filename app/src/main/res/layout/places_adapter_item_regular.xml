@@ -6,14 +6,19 @@
     <data>
 
         <variable
+            name="listener"
+            type="cafe.speciality.kochere.mvvm.feature.places.item.ItemClickListener" />
+
+        <variable
             name="viewModel"
-            type="io.bratexsoft.specialtycofeecode.mvvm.feature.places.item.RegularItemViewModel" />
+            type="cafe.speciality.kochere.mvvm.feature.places.item.RegularItemViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@color/white"
+        android:onClick="@{(v)-> listener.onRegularItemClick(viewModel.place)}"
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 
@@ -46,7 +51,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="2dp"
-            android:textSize="12sp"
+            android:fontFamily="@font/sfui_text_regular"
+            android:text="@{viewModel.restaurantSpecialization}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp"
             app:layout_constraintStart_toEndOf="@+id/restaurant_icon"
             app:layout_constraintTop_toBottomOf="@+id/restaurant_title"
             tools:text="Specialization" />

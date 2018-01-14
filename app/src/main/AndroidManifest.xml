@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.bratexsoft.specialtycofeecode">
+    package="cafe.speciality.kochere">
 
     <uses-feature android:name="android.hardware.location.gps" />
 
@@ -16,13 +16,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="io.bratexsoft.specialtycofeecode.mvvm.feature.places.PlacesActivity">
+        <activity android:name=".mvvm.feature.places.PlacesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".mvvm.feature.place.PlaceDetailsActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="2e8047b1a578c436cc800437eb9baf1efcbba928" />
 
     </application>
 </manifest>

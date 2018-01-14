@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">SpecialtyCofeeGuide</string>
+    <string name="app_name">Kochere</string>
     <string name="bottom_navigation_page_one">map</string>
     <string name="bottom_navigation_page_two">explore</string>
     <string name="bottom_navigation_page_three">profile</string>
+    <string name="specialization_espresso">Espresso</string>
+    <string name="specialization_aero_press">AeroPress</string>
+    <string name="specialization_chemex">Chemex</string>
+    <string name="specialization_cold_brew">Cold Brew</string>
+    <string name="specialization_drip">Drip</string>
+    <string name="specialization_syphon">Syphon</string>
 </resources>
