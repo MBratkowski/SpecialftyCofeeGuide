@@ -1,8 +1,8 @@
-package cafe.speciality.kochere.mvvm.feature.splash
+package cafe.speciality.kochere.mvp.feature.splash
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import cafe.speciality.kochere.mvvm.feature.places.PlacesActivity
+import cafe.speciality.kochere.mvp.feature.places.PlacesActivity
 import com.crashlytics.android.Crashlytics
 import io.fabric.sdk.android.Fabric
 

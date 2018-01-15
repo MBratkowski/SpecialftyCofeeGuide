@@ -1,4 +1,4 @@
-package cafe.speciality.kochere.mvvm.feature.place
+package cafe.speciality.kochere.mvp.feature.place
 
 import android.content.Context
 import android.content.Intent

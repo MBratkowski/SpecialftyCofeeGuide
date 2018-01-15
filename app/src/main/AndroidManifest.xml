@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".mvvm.feature.splash.SplashActivity"
+            android:name=".mvp.feature.splash.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,9 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".mvvm.feature.places.PlacesActivity" />
+        <activity android:name=".mvp.feature.places.PlacesActivity" />
 
-        <activity android:name=".mvvm.feature.place.PlaceDetailsActivity" />
+        <activity android:name=".mvp.feature.place.PlaceDetailsActivity" />
 
 
         <meta-data
