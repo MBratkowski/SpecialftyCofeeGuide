@@ -2,46 +2,21 @@ package cafe.speciality.kochere.support
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.location.Location
 import android.location.LocationManager
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import kotlin.properties.Delegates
+import cafe.speciality.kochere.repository.model.LocationData
 
 /**
  * Created by mateuszbratkowski on 14/01/2018.
  */
-class LocationProvider constructor(private val activity: AppCompatActivity,
-                                   private val locationPermissionSupport: LocationPermissionSupport,
-                                   private val locationListener: LocationChangeListener) : LocationPermissionSupport.Callback {
+class LocationProvider constructor(context: Context) {
 
-    interface LocationChangeListener {
-        fun onLocationChanged(location: Location)
-    }
-
-    private val locationManager: LocationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-
-    private var location: Location by Delegates.observable(
-            initialValue = Location(""),
-            onChange = { property, oldValue, newValue ->
-                locationListener.onLocationChanged(location)
-            }
-    )
+    private val locationManager: LocationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
     @SuppressLint("MissingPermission")
-    override fun permissionAccess() {
-        location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-    }
+    fun requestLocation(): LocationData {
+        val location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
+        return LocationData(location.latitude.toString(),
+                location.longitude.toString())
 
-    override fun permissionDeclined() {
-        AlertDialog.Builder(activity)
-                .setTitle("Some title")
-                .setMessage("Are you stupid")
-                .create()
-                .show()
-    }
-
-    fun requestLocation() {
-        locationPermissionSupport.checkPermission(this)
     }
 }
