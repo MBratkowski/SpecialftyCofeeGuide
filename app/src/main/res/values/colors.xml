@@ -2,11 +2,14 @@
 <resources>
     <color name="colorPrimary">#a9a9a9</color>
     <color name="colorPrimaryDark">#878787</color>
+    <color name="statusBarColor">#fafafa</color>
     <color name="colorAccent">#45494f</color>
 
     <color name="charlotGrey">#45494f</color>
     <color name="inactivateColor">#BDC3C6</color>
 
+    <color name="featured_specialization_color">#fbfbfb</color>
     <color name="white">#FFFFFF</color>
     <color name="splash_background_color">#F3F3ED</color>
+    <color name="gradient_color">#aa000000</color>
 </resources>
