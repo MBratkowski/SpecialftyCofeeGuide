@@ -1,12 +1,16 @@
 package cafe.speciality.kochere.di.module.activity
 
+import android.content.Context
 import android.support.v7.app.AppCompatActivity
+import cafe.speciality.kochere.R
 import cafe.speciality.kochere.di.scope.PerView
-import cafe.speciality.kochere.mvp.feature.places.PlacesActivity
+import cafe.speciality.kochere.domain.UseCaseFactory
+import cafe.speciality.kochere.mvp.feature.places.PlacesAdapter
 import cafe.speciality.kochere.mvp.feature.places.PlacesPresenter
 import cafe.speciality.kochere.mvp.feature.places.contract.PlacesContract
 import cafe.speciality.kochere.repository.model.Constant
 import cafe.speciality.kochere.support.LocationPermissionSupport
+import cafe.speciality.kochere.support.LocationProvider
 import dagger.Module
 import dagger.Provides
 
@@ -18,20 +22,20 @@ class PlacesModule {
 
     @PerView
     @Provides
-    fun providePlacesActivity(activity: AppCompatActivity): PlacesActivity {
-        return activity as PlacesActivity
+    fun provideLocationProvider(context: Context): LocationProvider {
+        return LocationProvider(context)
     }
 
     @PerView
     @Provides
-    fun provideLocationPermissionSupport(activity: AppCompatActivity): LocationPermissionSupport {
-        return LocationPermissionSupport(activity)
+    fun provideLocationPermissionSupport(context: Context): LocationPermissionSupport {
+        return LocationPermissionSupport(context)
     }
 
     @PerView
     @Provides
-    fun provideResources(activity: AppCompatActivity): HashMap<String, String> {
-        val resources = activity.resources
+    fun provideResources(context: Context): HashMap<String, String> {
+        val resources = context.resources
         val hashMap: HashMap<String, String> = HashMap()
         hashMap[Constant.TYPE_AEROPRESS] = resources.getString(R.string.specialization_aero_press)
         hashMap[Constant.TYPE_ESPRESSO] = resources.getString(R.string.specialization_espresso)
@@ -45,8 +49,17 @@ class PlacesModule {
 
     @PerView
     @Provides
-    fun providePresenter(): PlacesContract.Presenter {
-        return PlacesPresenter()
+    fun providePresenter(useCaseFactory: UseCaseFactory,
+                         locationPermissionSupport: LocationPermissionSupport,
+                         locationProvider: LocationProvider,
+                         stringResources: HashMap<String, String>): PlacesContract.Presenter {
+        return PlacesPresenter(useCaseFactory, locationPermissionSupport, locationProvider, stringResources)
+    }
+
+    @PerView
+    @Provides
+    fun provideAdapter(presenter: PlacesContract.Presenter): PlacesAdapter {
+        return PlacesAdapter(presenter)
     }
 
 }

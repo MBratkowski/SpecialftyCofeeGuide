@@ -13,7 +13,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Fabric.with(this, Crashlytics())
+        //Fabric.with(this, Crashlytics())
         PlacesActivity.startActivity(this)
         finish()
     }

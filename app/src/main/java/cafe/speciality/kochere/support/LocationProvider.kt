@@ -14,9 +14,9 @@ class LocationProvider constructor(context: Context) {
 
     @SuppressLint("MissingPermission")
     fun requestLocation(): LocationData {
-        val location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-        return LocationData(location.latitude.toString(),
-                location.longitude.toString())
+        //val location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+        return LocationData("51.1078850",
+                "17.0385380")
 
     }
 }

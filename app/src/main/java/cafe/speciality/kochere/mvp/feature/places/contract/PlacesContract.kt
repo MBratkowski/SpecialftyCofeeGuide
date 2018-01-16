@@ -4,9 +4,8 @@ import cafe.speciality.kochere.mvp.base.BasePresenter
 import cafe.speciality.kochere.mvp.base.BaseView
 import cafe.speciality.kochere.mvp.feature.places.item.FeaturedItemViewHolder
 import cafe.speciality.kochere.mvp.feature.places.item.RegularItemViewHolder
-import cafe.speciality.kochere.mvp.feature.places.item.definition.PlacesType
+import cafe.speciality.kochere.mvp.feature.places.item.definition.PlaceViewType
 import cafe.speciality.kochere.repository.model.Place
-import cafe.speciality.kochere.repository.model.Places
 
 /**
  * Created by mateuszbratkowski on 15/01/2018.
@@ -19,9 +18,11 @@ interface PlacesContract {
 
         abstract fun onBottomItemClick()
 
+        abstract fun getPlaces()
+
         abstract fun getCount(): Int
 
-        abstract fun getList(): List<PlacesType>
+        abstract fun getList(): List<PlaceViewType>
 
         abstract fun setSpanSize(position: Int): Int
 
@@ -31,11 +32,15 @@ interface PlacesContract {
     }
 
     interface View : BaseView {
-        fun displayList(list: List<Places>)
+        fun displayList(list: List<PlaceViewType>)
 
         fun showPlaceDetails(place: Place)
 
         fun showFindMorePlacesView()
+
+        fun showLoading()
+
+        fun hideLoading();
 
         fun showDialogWithAskOfPermission()
     }

@@ -1,6 +1,5 @@
 package cafe.speciality.kochere.repository.remote
 
-import cafe.speciality.kochere.di.scope.PerView
 import cafe.speciality.kochere.repository.PlacesRepositoryDefinition
 import cafe.speciality.kochere.repository.model.LocationData
 import cafe.speciality.kochere.repository.model.Places
@@ -9,11 +8,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
-@PerView
+@Singleton
 class PlacesRepositoryRemote @Inject constructor(private val service: RequestDefinition) : PlacesRepositoryDefinition {
 
     override fun getPlaces(location: LocationData, callback: DataCallback<Places>) {
