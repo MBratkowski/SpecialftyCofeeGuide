@@ -7,15 +7,14 @@ import cafe.speciality.kochere.mvp.feature.places.contract.PlacesContract
 import cafe.speciality.kochere.mvp.feature.places.item.BottomViewHolder
 import cafe.speciality.kochere.mvp.feature.places.item.FeaturedItemViewHolder
 import cafe.speciality.kochere.mvp.feature.places.item.RegularItemViewHolder
-import cafe.speciality.kochere.mvp.feature.places.item.definition.PlacesType
-import cafe.speciality.kochere.repository.model.Places
+import cafe.speciality.kochere.mvp.feature.places.item.definition.PlaceViewType
 
 /**
  * Created by mateuszbratkowski on 08/01/2018.
  */
 class PlacesAdapter(private val presenter: PlacesContract.Presenter) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var listItem: List<Places> = emptyList()
+    var listItem: List<PlaceViewType> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -23,13 +22,13 @@ class PlacesAdapter(private val presenter: PlacesContract.Presenter) : RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder? {
         return when (viewType) {
-            PlacesType.ITEM_REGULAR, PlacesType.ITEM_FEATURED -> RegularItemViewHolder(presenter, LayoutInflater.from(parent?.context).inflate(viewType,
+            PlaceViewType.ITEM_REGULAR -> RegularItemViewHolder(presenter, LayoutInflater.from(parent?.context).inflate(viewType,
                     parent,
                     false))
-            PlacesType.ITEM_FEATURED -> FeaturedItemViewHolder(presenter, LayoutInflater.from(parent?.context).inflate(viewType,
+            PlaceViewType.ITEM_FEATURED -> FeaturedItemViewHolder(presenter, LayoutInflater.from(parent?.context).inflate(viewType,
                     parent,
                     false))
-            PlacesType.ITEM_BOTTOM -> BottomViewHolder(presenter, LayoutInflater.from(parent?.context).inflate(viewType,
+            PlaceViewType.ITEM_BOTTOM -> BottomViewHolder(presenter, LayoutInflater.from(parent?.context).inflate(viewType,
                     parent,
                     false))
             else -> throw IllegalArgumentException("Invalid view type")
@@ -38,10 +37,10 @@ class PlacesAdapter(private val presenter: PlacesContract.Presenter) : RecyclerV
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            PlacesType.ITEM_REGULAR -> {
+            PlaceViewType.ITEM_REGULAR -> {
                 presenter.onBindItemRegular(position, holder as RegularItemViewHolder)
             }
-            PlacesType.ITEM_FEATURED -> {
+            PlaceViewType.ITEM_FEATURED -> {
                 presenter.onBindItemFeatured(position, holder as FeaturedItemViewHolder)
             }
         }
